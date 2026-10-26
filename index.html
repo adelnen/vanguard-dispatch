@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="no-referrer">
+  <title>Vanguard Dispatch - Breaking World News, Business, Tech, Science & Culture</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- TOP HEADER -->
+  <header class="top-header">
+    <div class="header-left">
+      <button class="icon-btn" onclick="toggleDrawer(true)" aria-label="Menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+      <button class="icon-btn" onclick="toggleDrawer(true)" aria-label="Search">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="brand-logo-wrap" onclick="selectCategory('Home', null)">
+      <div class="brand-blocks">
+        <span>V</span><span>D</span><span>N</span>
+      </div>
+      <span class="brand-title-text">Vanguard Dispatch</span>
+    </div>
+
+    <div class="header-right">
+      <button class="btn-subscribe" onclick="openLegal('register')">Subscribe</button>
+      <span class="btn-signin" onclick="openLegal('signin')">Sign In</span>
+    </div>
+  </header>
+
+  <!-- DYNAMIC NAVIGATION & SUB-NAVIGATION -->
+  <div class="nav-container">
+    <nav class="main-nav" id="main-nav"></nav>
+    <div class="sub-nav" id="sub-nav"></div>
+  </div>
+
+  <!-- CATEGORY TITLE BANNER -->
+  <div class="category-banner" id="category-banner">
+    <div class="category-banner-title">
+      <span class="cat-main" id="banner-cat"></span>
+      <span class="cat-sub" id="banner-sub"></span>
+    </div>
+  </div>
+
+  <!-- SIDEBAR DRAWER -->
+  <div class="drawer-overlay" id="drawer-overlay" onclick="toggleDrawer(false)"></div>
+  <aside class="drawer" id="drawer">
+    <div class="drawer-header">
+      <span>Sections & Search</span>
+      <button class="icon-btn" onclick="toggleDrawer(false)">✕</button>
+    </div>
+    <div class="drawer-search">
+      <input type="text" id="search-input" placeholder="Search news, topics and more" onkeyup="handleSearch(event)">
+      <button onclick="executeSearch()">🔍</button>
+    </div>
+    <div class="drawer-list" id="drawer-list"></div>
+  </aside>
+
+  <!-- MAIN CONTENT AREA -->
+  <main class="container" id="main-view">
+    <div id="hero-section"></div>
+    <div id="secondary-grid"></div>
+    <div id="compact-section"></div>
+    <div id="latest-section"></div>
+  </main>
+
+  <!-- INTERNAL ARTICLE READER -->
+  <section id="reader-view">
+    <div class="reader-sticky-bar">
+      <button class="back-btn" onclick="goBackHome()">← Back to All News</button>
+      <span style="font-size: 12px; color: var(--brand-muted); font-weight: 600;">Vanguard Dispatch Editorial</span>
+    </div>
+    <span class="reader-cat" id="reader-cat"></span>
+    <h1 class="reader-title" id="reader-title"></h1>
+    <div class="reader-meta" id="reader-meta"></div>
+    <div class="img-wrapper" style="margin-bottom: 24px;">
+      <img id="reader-img" src="" alt="" referrerpolicy="no-referrer" onerror="this.src=FALLBACK_IMG">
+    </div>
+    <div class="ad-slot">Advertisement - Sponsored Content</div>
+    <div class="reader-body" id="reader-body"></div>
+    <div class="ad-slot">Advertisement - Sponsored Content</div>
+    <div style="margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--brand-light);">
+      <button class="back-btn" onclick="goBackHome()">← Return to Front Page</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="brand-logo-wrap" onclick="selectCategory('Home', null)" style="margin-bottom: 16px;">
+        <div class="brand-blocks">
+          <span>V</span><span>D</span><span>N</span>
+        </div>
+        <span class="brand-title-text" style="display:block;">Vanguard Dispatch News</span>
+      </div>
+      <div class="footer-nav" id="footer-nav"></div>
+      <div class="footer-social">
+        <span>Follow Vanguard Dispatch:</span>
+        <span>𝕏</span><span>f</span><span>📷</span><span>in</span><span>▶</span>
+      </div>
+      <div class="footer-legal-links">
+        <span onclick="openLegal('terms')">Terms of Use</span>
+        <span onclick="openLegal('about')">About Vanguard Dispatch</span>
+        <span onclick="openLegal('privacy')">Privacy Policy (AdSense)</span>
+        <span onclick="openLegal('cookies')">Cookies Policy</span>
+        <span onclick="openLegal('privacy')">Do not share or sell my info</span>
+        <span onclick="openLegal('accessibility')">Accessibility Help</span>
+        <span onclick="openLegal('contact')">Contact Us</span>
+        <span onclick="openLegal('advertise')">Advertise with us</span>
+      </div>
+      <p class="footer-copyright">
+        Copyright © 2026 Vanguard Dispatch Media Group. All rights reserved. Vanguard Dispatch is an independent international news portal and is not affiliated with external broadcasters.
+      </p>
+    </div>
+  </footer>
+
+  <!-- LEGAL MODAL -->
+  <div class="modal-overlay" id="legal-modal" onclick="closeLegal()">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeLegal()">✕</button>
+      <div id="legal-content"></div>
+    </div>
+  </div>
+
+  <!-- GDPR COOKIE BANNER -->
+  <div class="cookie-banner" id="cookie-banner">
+    <div>
+      We use cookies and third-party advertising technologies (including Google AdSense) to personalize content and ads, and to analyze our traffic. By clicking "Accept All", you consent to our use of cookies.
+    </div>
+    <div class="cookie-actions">
+      <button class="cookie-btn cookie-manage" onclick="openLegal('cookies')">Manage Cookies</button>
+      <button class="cookie-btn cookie-accept" onclick="acceptCookies()">Accept All</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
